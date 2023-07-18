@@ -1,0 +1,43 @@
+<mat-drawer-container class="example-container" autosize>
+
+    <!--SIDEBAR-->
+    <mat-drawer #drawer class="w-2 example-sidenav" mode="side">
+      <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Alumnos</a></li>
+            <li><a href="#">Profesores</a></li>
+            <li><a href="#">Pagos</a></li>
+        </ul>
+      </nav>
+         
+    </mat-drawer>
+    <!-- FIN SIDEBAR-->
+  
+    <!-- MAIN WRAPPER -->
+    <div class="example-sidenav-content">
+
+        <!-- TOOLBAR -->
+        <p>
+            <mat-toolbar color="primary">
+              <button (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+              </button>
+              
+              <!-- uso de la directiva para especificar un font size -->
+              <span appFontSize="20px">MODULO DE ALUMNOS</span>
+              <span class="example-spacer"></span>
+            </mat-toolbar>
+        </p>
+
+        <!--FIN TOOLBAR -->
+        <main class="p-3">
+          <app-students>
+
+          </app-students>
+        </main>
+    </div>
+    <!-- FIN MAIN WRAPPER -->
+  
+  </mat-drawer-container>
+  
