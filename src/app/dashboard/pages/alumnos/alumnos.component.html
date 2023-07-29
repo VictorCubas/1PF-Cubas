@@ -1,7 +1,7 @@
 <div class="mb-5">
     <button (click)="onCreateUser()"  mat-flat-button color="primary" type="button">
         <mat-icon>add</mat-icon>
-        Crear Usuario
+        Crear Alumno
     </button>
 </div>
 
@@ -11,8 +11,7 @@
 
 <!-- TABLA PARA LA VISTA -->
 <app-users-table 
-    [dataSource]="students"
+    [dataSource]="(alumnosAsync | async) || []"
     (deleteUser)="openConfirmDialog($event)"
     (editUser)="onEditUser($event)">
-    
 </app-users-table>

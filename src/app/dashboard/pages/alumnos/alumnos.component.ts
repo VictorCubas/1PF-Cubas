@@ -1,46 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
 import { Student } from './models';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { Observable, Subject, map, tap } from 'rxjs';
+import { AlumnosService } from './alumnos.service';
 
 
 const ELEMENT_DATA: Student[] = [
-  {
-    id: 1,
-    name: 'Marcos',
-    surname: 'Rodriguez',
-    email: "marcos@gmail.com",
-    password: "123456"
-  },
-  {
-    id: 2,
-    name: 'Julian',
-    surname: 'Perez',
-    email: "julian@gmail.com",
-    password: "123456"
-  },
-  {
-    id: 3,
-    name: 'Maria',
-    surname: 'Lopez',
-    email: "maria@gmail.com",
-    password: "123456"
-  },
-  {
-    id: 4,
-    name: 'Andrea',
-    surname: 'Escurra',
-    email: "andrea@gmail.com",
-    password: "123456"
-  },
-  {
-    id: 5,
-    name: 'Victor',
-    surname: 'Cubas',
-    email: "victor@gmail.com",
-    password: "123456"
-  },
+  
 ];
 
 @Component({
@@ -48,13 +16,24 @@ const ELEMENT_DATA: Student[] = [
   templateUrl: './alumnos.component.html',
   styleUrls: ['./alumnos.component.scss']
 })
-export class AlumnosComponent {
-  public students: Student[] = ELEMENT_DATA;
+export class AlumnosComponent implements OnDestroy{
+  public students: Student[] = [];
+  public destroyed = new Subject<boolean>();
+  alumnosAsync: Observable<Student[]>;
+  numeroAlumnos: number = 0;
   
     constructor(
       private madDialog: MatDialog,
-    ){
-      
+      private alumnosService: AlumnosService){
+          this.alumnosAsync = this.alumnosService.getAlumnos().pipe(
+            map(alumnos => alumnos.map(alumno => ({
+              ...alumno, // Mantenemos todas las propiedades del alumno original
+              name: alumno.name.toUpperCase() // Modificamos solo la propiedad "name"
+            }))),
+            tap(alumnos => {
+              this.numeroAlumnos = alumnos.length;
+            })
+          );
     }
 
     onCreateUser(): void{
@@ -63,15 +42,16 @@ export class AlumnosComponent {
       dialogRef.afterClosed().subscribe({
         next: (v) => {
           if(v){
-
-            this.students = [...this.students,
-              {
-                id: this.students.length + 1,
+            const nuevoAlumno: Student = {
+                id: this.numeroAlumnos + 1,
                 name: v.name,
                 email: v.email,
                 password: v.password,
                 surname: v.surname
-              }]
+            }
+
+            // console.log(nuevoAlumno);
+            this.alumnosService.createAlumno(nuevoAlumno);
           }
         }
       });
@@ -105,25 +85,25 @@ export class AlumnosComponent {
       }
     }
 
-    onDelete2(userToEdit: Student): void{
+    // onDelete(userToEdit: Student): void{
 
-      const  dialogRef = this.madDialog.open(UserFormDialogComponent,  {
-        data : {
-          userToEdit: userToEdit,
-          operation: 'Editar'
-        }
-      });
+    //   const  dialogRef = this.madDialog.open(UserFormDialogComponent,  {
+    //     data : {
+    //       userToEdit: userToEdit,
+    //       operation: 'Editar'
+    //     }
+    //   });
 
-      dialogRef.afterClosed().subscribe({
-        next: (dataUpdate) => {
-          this.students = this.students.map((user) => {
-            return user.id === userToEdit.id 
-                  ? {...user, ...dataUpdate}
-                  : user 
-          })
-        }
-      })
-    }
+    //   dialogRef.afterClosed().subscribe({
+    //     next: (dataUpdate) => {
+    //       this.students = this.students.map((user) => {
+    //         return user.id === userToEdit.id 
+    //               ? {...user, ...dataUpdate}
+    //               : user 
+    //       })
+    //     }
+    //   })
+    // }
 
     openConfirmDialog(userToDelete: Student): void {
       const dialogRef = this.madDialog.open(ConfirmDialogComponent, {
@@ -138,5 +118,9 @@ export class AlumnosComponent {
           this.students = this.students.filter((u) => u.id !== userToDelete.id)
         }
       });
+    }
+
+    ngOnDestroy(): void {
+      this.destroyed.next(true);
     }
 }
