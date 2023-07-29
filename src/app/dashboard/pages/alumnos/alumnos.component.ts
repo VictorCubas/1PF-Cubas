@@ -69,11 +69,7 @@ export class AlumnosComponent implements OnDestroy{
 
       dialogRef.afterClosed().subscribe({
         next: (dataUpdate) => {
-          this.students = this.students.map((user) => {
-            return user.id === userToEdit.id 
-                  ? {...user, ...dataUpdate}
-                  : user 
-          })
+          this.alumnosService.updateUser(dataUpdate);
         }
       })
     }
