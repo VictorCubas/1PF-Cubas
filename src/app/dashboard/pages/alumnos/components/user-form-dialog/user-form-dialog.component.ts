@@ -10,7 +10,6 @@ import { Student } from '../../models';
 })
 export class UserFormDialogComponent {
   operation: string | null = 'Agregar';
-  idAlumno?: number = 0;
 
   nameControl = new FormControl<string | null>(null, [
     Validators.required,
@@ -39,7 +38,6 @@ export class UserFormDialogComponent {
     ){
       if(this.data){
         //estoy editando
-        this.idAlumno = data?.userToEdit.id;
         this.nameControl.setValue(this.data.userToEdit.name);
         this.surnameControl.setValue(this.data.userToEdit.surname);
         this.emailControl.setValue(this.data.userToEdit.email);
@@ -54,7 +52,7 @@ export class UserFormDialogComponent {
       this.userForm.markAllAsTouched();
     }else{
       console.log(this.userForm.value);
-      this.dialogRef.close({"id": this.idAlumno, ...this.userForm.value});
+      this.dialogRef.close(this.userForm.value);
     }
   }
 }

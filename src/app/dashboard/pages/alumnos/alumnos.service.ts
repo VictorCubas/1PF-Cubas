@@ -41,4 +41,12 @@ export class AlumnosService {
       this.alumnos$.next(this.alumnos);
     }
   }
+
+  deleteUserById(id: number): void{
+    this.alumnos = this.alumnos.filter(alumno => alumno.id !== id);
+    console.log(this.alumnos);
+
+    //emitimos
+    this.alumnos$.next(this.alumnos);
+  }
 }

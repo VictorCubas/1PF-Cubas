@@ -12,6 +12,6 @@
 <!-- TABLA PARA LA VISTA -->
 <app-users-table 
     [dataSource]="(alumnosAsync | async) || []"
-    (deleteUser)="openConfirmDialog($event)"
+    (deleteUser)="onDeleteUser($event)"
     (editUser)="onEditUser($event)">
 </app-users-table>

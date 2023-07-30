@@ -7,10 +7,6 @@ import { Observable, Subject, map, tap } from 'rxjs';
 import { AlumnosService } from './alumnos.service';
 
 
-const ELEMENT_DATA: Student[] = [
-  
-];
-
 @Component({
   selector: 'app-students',
   templateUrl: './alumnos.component.html',
@@ -50,7 +46,6 @@ export class AlumnosComponent implements OnDestroy{
                 surname: v.surname
             }
 
-            // console.log(nuevoAlumno);
             this.alumnosService.createAlumno(nuevoAlumno);
           }
         }
@@ -69,39 +64,13 @@ export class AlumnosComponent implements OnDestroy{
 
       dialogRef.afterClosed().subscribe({
         next: (dataUpdate) => {
-          this.alumnosService.updateUser(dataUpdate);
+          this.alumnosService.updateUser({'id': userToEdit.id ,...dataUpdate});
         }
       })
     }
 
-    onDeleteUser(userToDelete: Student): void{
 
-      if(confirm(`Estas seguro de eliminar a ${userToDelete.name}?`)){
-        this.students = this.students.filter((u) => u.id !== userToDelete.id)
-      }
-    }
-
-    // onDelete(userToEdit: Student): void{
-
-    //   const  dialogRef = this.madDialog.open(UserFormDialogComponent,  {
-    //     data : {
-    //       userToEdit: userToEdit,
-    //       operation: 'Editar'
-    //     }
-    //   });
-
-    //   dialogRef.afterClosed().subscribe({
-    //     next: (dataUpdate) => {
-    //       this.students = this.students.map((user) => {
-    //         return user.id === userToEdit.id 
-    //               ? {...user, ...dataUpdate}
-    //               : user 
-    //       })
-    //     }
-    //   })
-    // }
-
-    openConfirmDialog(userToDelete: Student): void {
+    onDeleteUser(userToDelete: Student): void {
       const dialogRef = this.madDialog.open(ConfirmDialogComponent, {
         width: '370px',
         data: { mensaje: `¿Estás seguro que quieres eliminar a este alumno (${userToDelete.name?.toUpperCase()}) de la lista?`,
@@ -109,9 +78,8 @@ export class AlumnosComponent implements OnDestroy{
       });
       
       dialogRef.afterClosed().subscribe(result => {
-        // console.log(result);
         if (result) {
-          this.students = this.students.filter((u) => u.id !== userToDelete.id)
+          this.alumnosService.deleteUserById(userToDelete.id);
         }
       });
     }
