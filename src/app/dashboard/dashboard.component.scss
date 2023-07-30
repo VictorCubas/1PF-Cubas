@@ -15,26 +15,3 @@
   main{
     min-height: calc(100vh-#{64px});
   }
-  
-
-  
-  nav ul {
-    list-style-type: none; /* Quita las viñetas de la lista */
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-
-  nav ul li a {
-    text-decoration: none; /* Quita el subrayado */
-    display: block;
-    color: white;
-    
-    padding: 5px;
-    width: 100%;
-  }
-
-  nav ul li{
-    padding: 10px;  
-    width: 100% !important;
-  }

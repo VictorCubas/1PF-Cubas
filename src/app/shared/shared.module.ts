@@ -12,6 +12,8 @@ import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
 import { FontSizeDirective } from './directives/fontsize.directive';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatListModule} from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import {MatMenuModule} from '@angular/material/menu';
     ControlErrorMessagePipe,
     FontSizeDirective,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatListModule
   ]
 })
 export class SharedModule { }

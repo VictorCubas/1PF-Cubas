@@ -8,10 +8,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeModule } from './pages/home/home.module';
 import { AlmunosModule } from './pages/alumnos/alumnos.module';
 import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
+import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    NavMenuComponent,
+    ToolbarComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +26,8 @@ import { SharedModule } from '../shared/shared.module';
     MatIconModule,
     HomeModule,
     AlmunosModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [
     DashboardComponent
