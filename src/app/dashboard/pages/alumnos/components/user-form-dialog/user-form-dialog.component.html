@@ -55,6 +55,6 @@
 </div>
 
 <div class="flex justify-content-end" mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button mat-dialog-close (click)="onCancelClick()">Cancelar</button>
     <button class="bg-blue-500" (click)="onSubmit()" type="submit" mat-button>Guardar</button>
 </div>

@@ -64,7 +64,10 @@ export class AlumnosComponent implements OnDestroy{
 
       dialogRef.afterClosed().subscribe({
         next: (dataUpdate) => {
-          this.alumnosService.updateUser({'id': userToEdit.id ,...dataUpdate});
+
+          if(dataUpdate){
+            this.alumnosService.updateAlumno({'id': userToEdit.id ,...dataUpdate});
+          }
         }
       })
     }
@@ -79,7 +82,7 @@ export class AlumnosComponent implements OnDestroy{
       
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.alumnosService.deleteUserById(userToDelete.id);
+          this.alumnosService.deleteAlumnoById(userToDelete.id);
         }
       });
     }

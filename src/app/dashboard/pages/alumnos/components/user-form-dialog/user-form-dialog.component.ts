@@ -55,4 +55,8 @@ export class UserFormDialogComponent {
       this.dialogRef.close(this.userForm.value);
     }
   }
+
+  onCancelClick(): void {
+    this.dialogRef.close(false);
+  }
 }

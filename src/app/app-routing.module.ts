@@ -5,9 +5,16 @@ import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './dashboard/pages/home/home.component';
 import { AlumnosComponent } from './dashboard/pages/alumnos/alumnos.component';
 import { AlumnoDetailComponent } from './dashboard/pages/alumnos/pages/alumno-detail/alumno-detail.component';
+import { LoginComponent } from './auth/pages/login/login.component';
+import { RegisterComponent } from './auth/pages/register/register.component';
 
 //objetos de configuracion de rutas
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -18,11 +25,16 @@ const routes: Routes = [
       },
       {
         path: 'students',
-        component: AlumnosComponent
-      },
-      {
-        path: 'students/:id',
-        component: AlumnoDetailComponent
+        children: [
+          {
+            path: '',
+            component: AlumnosComponent
+          },
+          {
+            path: ':id',
+            component: AlumnoDetailComponent
+          }
+        ]
       },
       {
         path: '**',
@@ -32,7 +44,21 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    component: AuthComponent
+    component: AuthComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      },
+      {
+        path: '**',
+        component: LoginComponent
+      }
+    ]
   },
   {
     path: '**',

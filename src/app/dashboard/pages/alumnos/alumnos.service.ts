@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { alumnos } from 'src/assets/data/alumnos.data';
 import { Student } from './models';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class AlumnosService {
     this.alumnos$.next(this.alumnos);
   }
 
-  updateUser(alumno: Student): void{
+  updateAlumno(alumno: Student): void{
     const index = this.alumnos.findIndex(a => a.id === alumno.id);
 
     if (index !== -1) {
@@ -42,11 +42,19 @@ export class AlumnosService {
     }
   }
 
-  deleteUserById(id: number): void{
+  deleteAlumnoById(id: number): void{
     this.alumnos = this.alumnos.filter(alumno => alumno.id !== id);
     console.log(this.alumnos);
 
     //emitimos
     this.alumnos$.next(this.alumnos);
   }
+
+  getAlumnoById(id: number): Observable<Student | null> {
+    return this.alumnos$.pipe(
+      map(alumnos => alumnos.find(alumno => alumno.id === id) || null),
+      take(1)
+    );
+  }
+  
 }
