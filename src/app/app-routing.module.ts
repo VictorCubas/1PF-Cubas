@@ -7,6 +7,7 @@ import { AlumnosComponent } from './dashboard/pages/alumnos/alumnos.component';
 import { AlumnoDetailComponent } from './dashboard/pages/alumnos/pages/alumno-detail/alumno-detail.component';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
+import { TeacherComponent } from './dashboard/pages/teacher/teacher/teacher.component';
 
 //objetos de configuracion de rutas
 const routes: Routes = [
@@ -34,6 +35,19 @@ const routes: Routes = [
             path: ':id',
             component: AlumnoDetailComponent
           }
+        ]
+      },
+      {
+        path: 'teachers',
+        children: [
+          {
+            path: '',
+            component: TeacherComponent
+          },
+          // {
+          //   path: ':id',
+          //   component: AlumnoDetailComponent
+          // }
         ]
       },
       {
