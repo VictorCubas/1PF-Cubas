@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
+import { TeacherModule } from './pages/teacher/teacher/teacher.module';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,10 @@ import { ToolbarComponent } from './layout/toolbar/toolbar.component';
     MatToolbarModule,
     MatIconModule,
     HomeModule,
-    AlmunosModule,
+    // AlmunosModule,
     SharedModule,
     RouterModule
+    // TeacherModule
   ],
   exports: [
     DashboardComponent

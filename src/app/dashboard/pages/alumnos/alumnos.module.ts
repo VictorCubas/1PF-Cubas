@@ -6,21 +6,25 @@ import { UserFormDialogComponent } from './components/user-form-dialog/user-form
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { AlumnoDetailComponent } from './pages/alumno-detail/alumno-detail.component';
+import { UsersTableModule } from './components/users-table/users-table.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AlumnosComponent,
     UserFormDialogComponent,
-    UsersTableComponent,
+    // UsersTableComponent,
     ConfirmDialogComponent,
     AlumnoDetailComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    UsersTableModule
   ],
-  exports: [AlumnosComponent]
+  exports: [AlumnosComponent,
+    // UsersTableComponent,
+  ]
 })
 export class AlmunosModule { }

@@ -1,1 +1,17 @@
-<p>teacher works!</p>
+<div class="mb-5">
+    <button (click)="onCreateUser()"  mat-flat-button color="primary" type="button">
+        <mat-icon>add</mat-icon>
+        Crear Profesor
+    </button>
+</div>
+
+<p appFontSize="20px">
+    El módulo que permite administrar y gestionar los profesores registrados en el sistema
+</p>
+
+<!-- TABLA PARA LA VISTA -->
+<app-users-table 
+    [dataSource]="(teachersAsync | async) || []"
+    (deleteUser)="onDeleteUser($event)"
+    (editUser)="onEditUser($event)">
+</app-users-table>
