@@ -13,7 +13,6 @@ import { RouterModule } from '@angular/router';
   declarations: [
     AlumnosComponent,
     UserFormDialogComponent,
-    // UsersTableComponent,
     ConfirmDialogComponent,
     AlumnoDetailComponent
   ],
@@ -24,7 +23,6 @@ import { RouterModule } from '@angular/router';
     UsersTableModule
   ],
   exports: [AlumnosComponent,
-    // UsersTableComponent,
   ]
 })
 export class AlmunosModule { }

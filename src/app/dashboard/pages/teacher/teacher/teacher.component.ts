@@ -13,7 +13,6 @@ import { ConfirmDialogComponent } from '../../alumnos/components/confirm-dialog/
   styleUrls: ['./teacher.component.scss']
 })
 export class TeacherComponent {
-  public students: Teacher[] = [];
   public destroyed = new Subject<boolean>();
   teachersAsync: Observable<Teacher[]>;
   numeroTeachers: number = 0;

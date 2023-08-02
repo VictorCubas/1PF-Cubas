@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { TeacherModule } from './pages/teacher/teacher/teacher.module';
+import { CoursesComponent } from './pages/courses/courses.component';
+import { CoursesModule } from './pages/courses/courses.module';
 
 @NgModule({
   declarations: [
@@ -26,10 +28,9 @@ import { TeacherModule } from './pages/teacher/teacher/teacher.module';
     MatToolbarModule,
     MatIconModule,
     HomeModule,
-    // AlmunosModule,
     SharedModule,
-    RouterModule
-    // TeacherModule
+    RouterModule,
+    CoursesModule
   ],
   exports: [
     DashboardComponent
