@@ -20,73 +20,75 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: 'students',
-        children: [
-          {
-            path: '',
-            component: AlumnosComponent
-          },
-          {
-            path: ':id',
-            component: AlumnoDetailComponent
-          }
-        ]
-      },
-      {
-        path: 'courses',
-        children: [
-          {
-            path: '',
-            component: CoursesComponent
-          },
-          // {
-          //   path: ':id',
-          //   component: AlumnoDetailComponent
-          // }
-        ]
-      },
-      {
-        path: 'teachers',
-        children: [
-          {
-            path: '',
-            component: TeacherComponent
-          },
-          // {
-          //   path: ':id',
-          //   component: AlumnoDetailComponent
-          // }
-        ]
-      },
-      {
-        path: '**',
-        component: HomeComponent
-      }
-    ]
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    // children: [
+    //   {
+    //     path: 'home',
+    //     component: HomeComponent
+    //   },
+    //   {
+    //     path: 'students',
+    //     children: [
+    //       {
+    //         path: '',
+    //         component: AlumnosComponent
+    //       },
+    //       {
+    //         path: ':id',
+    //         component: AlumnoDetailComponent
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     path: 'courses',
+    //     children: [
+    //       {
+    //         path: '',
+    //         component: CoursesComponent
+    //       },
+    //       // {
+    //       //   path: ':id',
+    //       //   component: AlumnoDetailComponent
+    //       // }
+    //     ]
+    //   },
+    //   {
+    //     path: 'teachers',
+    //     children: [
+    //       {
+    //         path: '',
+    //         component: TeacherComponent
+    //       },
+    //       // {
+    //       //   path: ':id',
+    //       //   component: AlumnoDetailComponent
+    //       // }
+    //     ]
+    //   },
+    //   {
+    //     path: '**',
+    //     component: HomeComponent
+    //   }
+    // ]
   },
   {
     path: 'auth',
     component: AuthComponent,
-    children: [
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'register',
-        component: RegisterComponent
-      },
-      {
-        path: '**',
-        component: LoginComponent
-      }
-    ]
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    // children: [
+    //   {
+    //     path: 'login',
+    //     component: LoginComponent
+    //   },
+    //   {
+    //     path: 'register',
+    //     component: RegisterComponent
+    //   },
+    //   {
+    //     path: '**',
+    //     component: LoginComponent
+    //   }
+    // ]
   },
   {
     path: '**',

@@ -14,6 +14,7 @@ import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { TeacherModule } from './pages/teacher/teacher/teacher.module';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { CoursesModule } from './pages/courses/courses.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CoursesModule } from './pages/courses/courses.module';
     HomeModule,
     SharedModule,
     RouterModule,
-    CoursesModule
+    CoursesModule,
+    DashboardRoutingModule
   ],
   exports: [
     DashboardComponent
