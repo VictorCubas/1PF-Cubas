@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { AlumnoDetailComponent } from './pages/alumno-detail/alumno-detail.component';
 import { UsersTableModule } from './components/users-table/users-table.module';
 import { RouterModule } from '@angular/router';
+import { AlumnosRoutingModule } from './alumnos-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     SharedModule,
     RouterModule,
-    UsersTableModule
+    UsersTableModule,
+    AlumnosRoutingModule
   ],
   exports: [AlumnosComponent,
   ]
