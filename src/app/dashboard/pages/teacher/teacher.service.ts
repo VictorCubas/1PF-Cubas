@@ -24,19 +24,19 @@ export class TeacherService {
     return this.teachers$;
   }
 
-  createTeacher(alumno: Teacher): void{
-    this.teachers = [...this.teachers, alumno];
+  createTeacher(teacher: Teacher): void{
+    this.teachers = [...this.teachers, teacher];
 
     //emitimos
     this.teachers$.next(this.teachers);
   }
 
-  updateTeacher(alumno: Teacher): void{
-    const index = this.teachers.findIndex(a => a.id === alumno.id);
+  updateTeacher(teacher: Teacher): void{
+    const index = this.teachers.findIndex(a => a.id === teacher.id);
 
     if (index !== -1) {
       // Actualizar el estudiante en el array
-      this.teachers[index] = alumno;
+      this.teachers[index] = teacher;
 
       //emitimos
       this.teachers$.next(this.teachers);
@@ -44,7 +44,7 @@ export class TeacherService {
   }
 
   deleteTeacherById(id: number): void{
-    this.teachers = this.teachers.filter(alumno => alumno.id !== id);
+    this.teachers = this.teachers.filter(teacher => teacher.id !== id);
     console.log(this.teachers);
 
     //emitimos
@@ -52,8 +52,14 @@ export class TeacherService {
   }
 
   getTeacherById(id: number): Observable<Teacher | null> {
+    console.log('3');
+    console.log(this.teachers$.pipe(
+      map(teachers => teachers.find(t => t.id === id) || null),
+      take(1)
+    ));
+    
     return this.teachers$.pipe(
-      map(teachers => teachers.find(alumno => alumno.id === id) || null),
+      map(teachers => teachers.find(t => t.id === id) || null),
       take(1)
     );
   }

@@ -31,7 +31,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     HomeModule,
     SharedModule,
     RouterModule,
-    CoursesModule,
     DashboardRoutingModule
   ],
   exports: [

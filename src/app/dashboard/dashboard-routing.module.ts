@@ -16,13 +16,14 @@ const routes: Routes = [
       loadChildren: () => import('./pages/alumnos/alumnos.module').then(m => m.AlmunosModule)
     },
     {
-    path: 'courses',
-    children: [
-        {
-        path: '',
-        component: CoursesComponent
-        }
-    ]
+      path: 'courses',
+      loadChildren: () => import('./pages/courses/courses.module').then(m => m.CoursesModule)
+    // children: [
+    //     {
+    //     path: '',
+    //     component: CoursesComponent
+    //     }
+    // ]
     },
     {
     path: 'teachers',
