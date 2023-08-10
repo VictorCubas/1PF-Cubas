@@ -52,11 +52,6 @@ export class TeacherService {
   }
 
   getTeacherById(id: number): Observable<Teacher | null> {
-    console.log('3');
-    console.log(this.teachers$.pipe(
-      map(teachers => teachers.find(t => t.id === id) || null),
-      take(1)
-    ));
     
     return this.teachers$.pipe(
       map(teachers => teachers.find(t => t.id === id) || null),
