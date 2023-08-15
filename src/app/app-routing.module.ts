@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: DashboardComponent
+    redirectTo: '/auth/login',
   }
 ];
 

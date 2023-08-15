@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { alumnos } from 'src/assets/data/alumnos.data';
 import { Student } from './models';
 import { BehaviorSubject, Observable, Subject, map, take } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,19 @@ export class AlumnosService {
   private alumnos: Student[];
   private alumnos$ = new BehaviorSubject<Student []>([]);
 
-  constructor() { 
+  constructor(private httpClient: HttpClient) { 
     this.alumnos = alumnos;
     this.loadAlumnos();
   }
 
   loadAlumnos(): void{
-    this.alumnos$.next(this.alumnos)
+    // this.alumnos$.next(this.alumnos)
+
+    this.httpClient.get<Student []>('http://localhost:3000/students').subscribe({
+      next: (response) => {
+        this.alumnos$.next(response);
+      }
+    });
   }
 
   getAlumnos(): Subject<Student[]>{
