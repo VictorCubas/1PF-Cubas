@@ -3,6 +3,8 @@ import { LoginPayLoad } from "./models";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../dashboard/pages/users/models";
 import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
+import { Student } from "../dashboard/pages/alumnos/models";
 
 @Injectable({providedIn: 'root'})
 export class AuthService{
@@ -11,27 +13,29 @@ export class AuthService{
     private isAuthenticated: boolean = false;
 
 
-    constructor(private router: Router){
+    constructor(private router: Router,
+        private httpClient: HttpClient){
 
     }
 
     login(payLoad: LoginPayLoad): void{
-        const MOCK_USER: User = {
-            id:50,
-            name: 'Mockname',
-            surname: 'Mocksurname',
-            email: 'fake_email@gmail.com',
-            password: '12345'
-        }
-
-        if(payLoad.email === MOCK_USER.email && payLoad.password === MOCK_USER.password){
-            this._authUser$.next(MOCK_USER);
-            this.router.navigate(['dashboard'], {})
-            this.isAuthenticated = true;
-        }
-        else{
-            this._authUser$.next(null);
-        }
+        this.httpClient.get<Student []>('http://localhost:3000/students', {
+            params: {
+                email: payLoad.email || '',
+                password: payLoad.password || ''
+            }
+        }).subscribe({
+            next: (response) =>{
+                if(response.length){
+                     this._authUser$.next(response[0]);
+                     this.router.navigate(['dashboard'], {})
+                     this.isAuthenticated = true;
+                }
+                else{
+                    this._authUser$.next(null);
+                }
+            }
+        })
     }
 
     isUserAuthenticated(): boolean{
