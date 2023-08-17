@@ -4,3 +4,66 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+
+.mat-mdc-snack-bar-container.error-snackbar {
+  .mdc-snackbar__surface {
+    background-color: red !important;
+    opacity: 0.9 !important;
+
+    .mat-mdc-snack-bar-label.mdc-snackbar__label{
+      color: #fff;
+    }
+
+    .mat-mdc-button-persistent-ripple.mdc-button__ripple{
+      background-color: rgb(237, 0, 0);
+
+      // &:hover{
+      //   background-color: green !important;
+      //   // color: green !important;
+      //   border-radius: 5px;
+      // }
+    }
+
+    .mdc-button__label{
+      color: #fff;
+    }
+  }
+}
+
+.mat-mdc-snack-bar-container.success-snackbar {
+  .mdc-snackbar__surface {
+    background-color: rgb(0, 170, 0) !important;
+    opacity: 0.9 !important;
+
+    .mat-mdc-snack-bar-label.mdc-snackbar__label{
+      color: #fff;
+    }
+
+    .mat-mdc-button-persistent-ripple.mdc-button__ripple{
+      background-color: rgb(0, 150, 0)
+    }
+
+    .mdc-button__label{
+      color: #fff;
+    }
+  }
+}
+
+.mat-mdc-snack-bar-container.warning-snackbar {
+  .mdc-snackbar__surface {
+    background-color: rgb(235, 153, 0) !important;
+    opacity: 0.9 !important;
+
+    .mat-mdc-snack-bar-label.mdc-snackbar__label{
+      color: #fff;
+    }
+
+    .mat-mdc-button-persistent-ripple.mdc-button__ripple{
+      background-color: rgb(212, 138, 1)
+    }
+
+    .mdc-button__label{
+      color: #fff;
+    }
+  }
+}

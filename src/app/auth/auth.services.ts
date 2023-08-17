@@ -5,6 +5,7 @@ import { User } from "../dashboard/pages/users/models";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Student } from "../dashboard/pages/alumnos/models";
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
 
 @Injectable({providedIn: 'root'})
 export class AuthService{
@@ -13,9 +14,10 @@ export class AuthService{
     private isAuthenticated: boolean = false;
 
 
-    constructor(private router: Router,
-        private httpClient: HttpClient){
-
+    constructor(
+        private router: Router,
+        private httpClient: HttpClient,
+        private snackBar: MatSnackBar){
     }
 
     login(payLoad: LoginPayLoad): void{
@@ -33,13 +35,25 @@ export class AuthService{
                 }
                 else{
                     this._authUser$.next(null);
+                    this.showSnackbar('Credenciales incorrectas', 'error-snackbar');
                 }
+            },
+            error: (err) => {
+                this.showSnackbar('No se ha podido iniciar sesion', 'error-snackbar');
             }
         })
     }
 
     isUserAuthenticated(): boolean{
-        console.log('this.isAuthenticated: ' + this.isAuthenticated)
+        // console.log('this.isAuthenticated: ' + this.isAuthenticated)
         return this.isAuthenticated;
+    }
+
+    showSnackbar(mensaje: string, customClass: string) {
+        const config = new MatSnackBarConfig();
+        config.panelClass = [customClass]; // Agrega la clase personalizada al panel
+        config.duration = 3500;
+    
+        this.snackBar.open(mensaje, 'Cerrar', config);
     }
 }

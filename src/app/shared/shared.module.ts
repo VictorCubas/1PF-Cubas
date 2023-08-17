@@ -13,7 +13,7 @@ import { ControlErrorMessagePipe } from './pipes/control-error-message.pipe';
 import { FontSizeDirective } from './directives/fontsize.directive';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import {MatListModule} from '@angular/material/list';
     FontSizeDirective,
     MatButtonModule,
     MatMenuModule,
-    MatListModule
+    MatListModule,
+    MatSnackBarModule,
   ]
 })
 export class SharedModule { }

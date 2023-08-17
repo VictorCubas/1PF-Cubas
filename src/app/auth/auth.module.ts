@@ -7,8 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { AuthRoutingModule } from './auth-routing.module';
 
-
-
 @NgModule({
   declarations: [
     AuthComponent,
@@ -21,6 +19,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     RouterModule,
     AuthRoutingModule,
     SharedModule
-  ]
+  ],
 })
 export class AuthModule { }
