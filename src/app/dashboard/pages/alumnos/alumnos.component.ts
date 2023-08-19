@@ -5,6 +5,7 @@ import { Student } from './models';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { Observable, Subject, map, tap } from 'rxjs';
 import { AlumnosService } from './alumnos.service';
+import { generateRandomString } from 'src/app/shared/utils/helpers';
 
 
 @Component({
@@ -38,12 +39,15 @@ export class AlumnosComponent implements OnDestroy{
       dialogRef.afterClosed().subscribe({
         next: (v) => {
           if(v){
+            const token = generateRandomString(20);
+            
             const nuevoAlumno: Student = {
                 id: this.numeroAlumnos + 1,
                 name: v.name,
                 email: v.email,
                 password: v.password,
-                surname: v.surname
+                surname: v.surname,
+                token: token
             }
 
             this.alumnosService.createAlumno(nuevoAlumno);

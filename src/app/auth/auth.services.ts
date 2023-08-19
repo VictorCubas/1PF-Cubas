@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { LoginPayLoad } from "./models";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, map } from "rxjs";
 import { User } from "../dashboard/pages/users/models";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
@@ -29,9 +29,12 @@ export class AuthService{
         }).subscribe({
             next: (response) =>{
                 if(response.length){
-                     this._authUser$.next(response[0]);
-                     this.router.navigate(['dashboard'], {})
-                     this.isAuthenticated = true;
+                    const authUser = response[0];
+                    this._authUser$.next(authUser);
+                    this.router.navigate(['dashboard'], {})
+
+                    localStorage.setItem('token', authUser.token);
+                    this.isAuthenticated = true;
                 }
                 else{
                     this._authUser$.next(null);
@@ -39,19 +42,28 @@ export class AuthService{
                 }
             },
             error: (err) => {
-                this.showSnackbar('No se ha podido iniciar sesion', 'error-snackbar');
+                this.showSnackbar('No se ha podido iniciar sesion. Olvidaste Ejecutar Json Server?', 'error-snackbar');
             }
         })
     }
 
-    isUserAuthenticated(): boolean{
+    isUserAuthenticated(): Observable<boolean>{
         // console.log('this.isAuthenticated: ' + this.isAuthenticated)
-        return this.isAuthenticated;
+        // return this.isAuthenticated;
+        return this.httpClient.get<Student[]>('http://localhost:3000/students', {
+            params: {
+                token: localStorage.getItem('token') || '',
+            }
+        }).pipe(
+            map((students) => {
+                return !!students.length
+            })
+        )
     }
 
     showSnackbar(mensaje: string, customClass: string) {
         const config = new MatSnackBarConfig();
-        config.panelClass = [customClass]; // Agrega la clase personalizada al panel
+        config.panelClass = [customClass];
         config.duration = 3500;
     
         this.snackBar.open(mensaje, 'Cerrar', config);

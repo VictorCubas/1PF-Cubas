@@ -36,7 +36,8 @@ export class AlumnosService {
   }
 
   createAlumno(alumno: Student): void{
-    this.httpClient.post<Student>('http://localhost:3000/students', alumno)
+    
+    this.httpClient.post<Student>('http://localhost:3000/students', {...alumno})
     .pipe(
       mergeMap((userCreate) => this.alumnos$.pipe(
         take(1),
