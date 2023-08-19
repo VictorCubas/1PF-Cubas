@@ -3,6 +3,7 @@ import { alumnos } from 'src/assets/data/alumnos.data';
 import { Student } from './models';
 import { BehaviorSubject, Observable, Subject, map, mergeMap, take } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AlumnosService {
   loadAlumnos(): void{
     // this.alumnos$.next(this.alumnos)
 
-    this.httpClient.get<Student []>('http://localhost:3000/students', {
+    this.httpClient.get<Student []>(environment.baseApiUrl + '/students', {
       headers: new HttpHeaders({
         'token': '123456789'
       })
@@ -37,7 +38,7 @@ export class AlumnosService {
 
   createAlumno(alumno: Student): void{
     
-    this.httpClient.post<Student>('http://localhost:3000/students', {...alumno})
+    this.httpClient.post<Student>(environment.baseApiUrl + '/students', {...alumno})
     .pipe(
       mergeMap((userCreate) => this.alumnos$.pipe(
         take(1),
@@ -66,14 +67,14 @@ export class AlumnosService {
     //   this.alumnos$.next(this.alumnos);
     // }
 
-    this.httpClient.put('http://localhost:3000/students/' + alumno.id, alumno)
+    this.httpClient.put(environment.baseApiUrl + '/students/' + alumno.id, alumno)
     .subscribe({
       next: () => this.loadAlumnos()
     })
   }
 
   deleteAlumnoById(id: number): void{
-    this.httpClient.delete('http://localhost:3000/students/' + id)
+    this.httpClient.delete(environment.baseApiUrl + '/students/' + id)
     .pipe(
       mergeMap((usuarioEliminado) => this.alumnos$.pipe(
         take(1),

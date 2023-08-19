@@ -39,14 +39,6 @@
       "email": "victor@gmail.com",
       "password": "123456",
       "token": "2132342fsdfsdfadasdqwe"
-    },
-    {
-      "id": 6,
-      "name": "Kenzo",
-      "email": "kenzo@gmail.com",
-      "password": "asdadasdasd",
-      "surname": "cubas",
-      "token": "bKpQPW0OOF63M7RtFvLr"
     }
   ],
   "products": []
