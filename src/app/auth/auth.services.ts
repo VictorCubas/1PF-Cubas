@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Student } from "../dashboard/pages/alumnos/models";
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
+import { environment } from "src/environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthService{
@@ -21,7 +22,7 @@ export class AuthService{
     }
 
     login(payLoad: LoginPayLoad): void{
-        this.httpClient.get<Student []>('http://localhost:3000/students', {
+        this.httpClient.get<Student []>(environment.baseApiUrl + '/students', {
             params: {
                 email: payLoad.email || '',
                 password: payLoad.password || ''
@@ -50,7 +51,7 @@ export class AuthService{
     isUserAuthenticated(): Observable<boolean>{
         // console.log('this.isAuthenticated: ' + this.isAuthenticated)
         // return this.isAuthenticated;
-        return this.httpClient.get<Student[]>('http://localhost:3000/students', {
+        return this.httpClient.get<Student[]>(environment.baseApiUrl + '/students', {
             params: {
                 token: localStorage.getItem('token') || '',
             }
