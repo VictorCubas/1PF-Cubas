@@ -7,18 +7,19 @@ import { HttpClient } from "@angular/common/http";
 import { Student } from "../dashboard/pages/alumnos/models";
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar'
 import { environment } from "src/environments/environment";
+import { Store } from "@ngrx/store";
+import { AuthActions } from "../store/auth.actions.ts/auth.actions";
 
 @Injectable({providedIn: 'root'})
 export class AuthService{
-    private _authUser$ = new BehaviorSubject<User | null>(null);
-    public authUser$ = this._authUser$.asObservable();
     private isAuthenticated: boolean = false;
 
 
     constructor(
         private router: Router,
         private httpClient: HttpClient,
-        private snackBar: MatSnackBar){
+        private snackBar: MatSnackBar,
+        private store: Store){
     }
 
     login(payLoad: LoginPayLoad): void{
@@ -31,15 +32,16 @@ export class AuthService{
             next: (response) =>{
                 if(response.length){
                     const authUser = response[0];
-                    this._authUser$.next(authUser);
+
+                    this.store.dispatch(AuthActions.setAuthUser({payload: authUser}))
                     this.router.navigate(['dashboard'], {})
 
                     localStorage.setItem('token', authUser.token);
                     this.isAuthenticated = true;
                 }
                 else{
-                    this._authUser$.next(null);
                     this.showSnackbar('Credenciales incorrectas', 'error-snackbar');
+                    this.store.dispatch(AuthActions.setAuthUser({payload: null}))
                 }
             },
             error: (err) => {
@@ -49,8 +51,6 @@ export class AuthService{
     }
 
     isUserAuthenticated(): Observable<boolean>{
-        // console.log('this.isAuthenticated: ' + this.isAuthenticated)
-        // return this.isAuthenticated;
         return this.httpClient.get<Student[]>(environment.baseApiUrl + '/students', {
             params: {
                 token: localStorage.getItem('token') || '',
@@ -68,5 +68,9 @@ export class AuthService{
         config.duration = 3500;
     
         this.snackBar.open(mensaje, 'Cerrar', config);
+    }
+
+    public logout(): void{
+        this.store.dispatch(AuthActions.setAuthUser({payload: null}))
     }
 }
