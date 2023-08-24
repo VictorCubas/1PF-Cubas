@@ -1,10 +1,13 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, Subject, map, tap } from 'rxjs';
 import { Course } from './model';
 import { CoursesService } from './courses.service';
 import { UserFormDialogComponent } from '../alumnos/components/user-form-dialog/user-form-dialog.component';
 import { ConfirmDialogComponent } from '../alumnos/components/confirm-dialog/confirm-dialog.component';
+import { Store } from '@ngrx/store';
+import { CoursesActions } from './store/courses.actions';
+import { selectCourses, selectCoursesState } from './store/courses.selectors';
 
 
 @Component({
@@ -12,23 +15,29 @@ import { ConfirmDialogComponent } from '../alumnos/components/confirm-dialog/con
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss']
 })
-export class CoursesComponent {
+export class CoursesComponent implements OnInit{
   public destroyed = new Subject<boolean>();
   coursesAsync: Observable<Course[]>;
   numeroCourses: number = 0;
 
   constructor(
     private madDialog: MatDialog,
-    private coursesService: CoursesService){
-        this.coursesAsync = this.coursesService.getCourses().pipe(
-          map(courses => courses.map(curso => ({
-            ...curso, // Mantenemos todas las propiedades del curso original
-            name: curso.name.toUpperCase() // Modificamos solo la propiedad "name"
-          }))),
-          tap(courses => {
-            this.numeroCourses = courses.length;
-          })
-        );
+    private coursesService: CoursesService,
+    private store: Store){
+      //  this.coursesAsync = this.store.select(selectCoursesState);
+      this.coursesAsync = this.store.select(selectCourses);
+        // this.coursesAsync = this.coursesService.getCourses().pipe(
+        //   map(courses => courses.map(curso => ({
+        //     ...curso, // Mantenemos todas las propiedades del curso original
+        //     name: curso.name.toUpperCase() // Modificamos solo la propiedad "name"
+        //   }))),
+        //   tap(courses => {
+        //     this.numeroCourses = courses.length;
+        //   })
+        // );
+  }
+  ngOnInit(): void {
+    this.store.dispatch(CoursesActions.loadCourses());
   }
 
   onCreateUser(): void{

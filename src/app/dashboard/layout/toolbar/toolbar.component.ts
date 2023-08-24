@@ -16,7 +16,7 @@ export class ToolbarComponent {
   public drawer?: MatDrawer;
   public authUser$: Observable<User | null>;
   
-  constructor(private authService: AuthService, private store: Store){
+  constructor(private store: Store){
    this.authUser$ = this.store.select(selectAuthUser);
   }
 }
