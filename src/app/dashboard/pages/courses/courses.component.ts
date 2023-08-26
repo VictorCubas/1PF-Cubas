@@ -24,17 +24,8 @@ export class CoursesComponent implements OnInit{
     private madDialog: MatDialog,
     private coursesService: CoursesService,
     private store: Store){
-      //  this.coursesAsync = this.store.select(selectCoursesState);
       this.coursesAsync = this.store.select(selectCourses);
-        // this.coursesAsync = this.coursesService.getCourses().pipe(
-        //   map(courses => courses.map(curso => ({
-        //     ...curso, // Mantenemos todas las propiedades del curso original
-        //     name: curso.name.toUpperCase() // Modificamos solo la propiedad "name"
-        //   }))),
-        //   tap(courses => {
-        //     this.numeroCourses = courses.length;
-        //   })
-        // );
+       
   }
   ngOnInit(): void {
     this.store.dispatch(CoursesActions.loadCourses());

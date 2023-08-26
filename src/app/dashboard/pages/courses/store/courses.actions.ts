@@ -4,7 +4,6 @@ export const CoursesActions = createActionGroup({
   source: 'Courses',
   events: {
     'Load Courses': emptyProps(),
-    
-    
+    'Load Course Detail': props<{courseId: number}>()
   }
 });

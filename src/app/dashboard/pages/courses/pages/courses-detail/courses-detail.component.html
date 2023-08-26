@@ -2,6 +2,33 @@
     <mat-icon>arrow_back</mat-icon>
 </button>
 
-<pre>
+<!-- <pre>
     {{ course | json }}
-</pre>
+</pre> -->
+<h1>Detalle del curso: {{ courseName$ | async}}</h1>
+<h3>ALUMNOS INSCRIPTOS AL CURSO</h3>
+
+<table mat-table [dataSource]="alumnos" class="mat-elevation-z8">
+    <!-- Column 1 -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- Column 2 -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name Completo </th>
+      <td mat-cell *matCellDef="let element"> {{element | fullName: 'uppercase'}} </td>
+    </ng-container>
+
+    <!-- Column 3 -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  

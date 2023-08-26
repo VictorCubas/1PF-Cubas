@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AlumnosService {
-  private alumnos: Student[] = [];
   private alumnos$ = new BehaviorSubject<Student []>([]);
 
   constructor(private httpClient: HttpClient) { 
@@ -57,16 +56,6 @@ export class AlumnosService {
   }
 
   updateAlumno(alumno: Student): void{
-    // const index = this.alumnos.findIndex(a => a.id === alumno.id);
-
-    // if (index !== -1) {
-    //   // Actualizar el estudiante en el array
-    //   this.alumnos[index] = alumno;
-
-    //   //emitimos
-    //   this.alumnos$.next(this.alumnos);
-    // }
-
     this.httpClient.put(environment.baseApiUrl + '/students/' + alumno.id, alumno)
     .subscribe({
       next: () => this.loadAlumnos()
@@ -85,18 +74,14 @@ export class AlumnosService {
     })
   }
 
-
-  // this.alumnos$.pipe(take(1)).subscribe({
-  //   next: (arrayActual) => {
-      
-  //   }
-  // })
-
   getAlumnoById(id: number): Observable<Student | null> {
     return this.alumnos$.pipe(
       map(alumnos => alumnos.find(alumno => alumno.id === id) || null),
       take(1)
     );
   }
-  
+
+  getAlumnosByCourseId(courseId:number): Observable<Student[]>{
+    return this.httpClient.get<Student []>(environment.baseApiUrl + "/students?courseId=" + courseId)
+  }
 }

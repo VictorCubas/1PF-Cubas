@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, map, take } from 'rxjs';
 import { courses } from 'src/assets/data/courses.data';
 import { Course } from './model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +12,20 @@ export class CoursesService {
   private courses: Course[];
   private courses$ = new BehaviorSubject<Course []>([]);
 
-  constructor() { 
+  constructor(private httpClient: HttpClient) { 
     this.courses = courses;
     this.loadCourses();
   }
 
   loadCourses(): void{
-    this.courses$.next(this.courses)
+    // this.courses$.next(this.courses)
+
+    this.httpClient.get<Course []>(environment.baseApiUrl + '/courses')
+    .subscribe({
+      next: (response) => {
+        this.courses$.next(response);
+      }
+    });
   }
 
   getCourses(): Subject<Course[]>{

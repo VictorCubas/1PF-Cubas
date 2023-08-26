@@ -47,7 +47,8 @@ export class AlumnosComponent implements OnDestroy{
                 email: v.email,
                 password: v.password,
                 surname: v.surname,
-                token: token
+                token: token,
+                courseId: 1
             }
 
             this.alumnosService.createAlumno(nuevoAlumno);
