@@ -15,6 +15,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select'
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { MatSelectModule } from '@angular/material/select'
     MatMenuModule,
     MatListModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressBarModule
   ]
 })
 export class SharedModule { }

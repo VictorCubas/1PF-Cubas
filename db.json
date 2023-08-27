@@ -47,7 +47,7 @@
       "email": "victor@gmail.com",
       "password": "123456",
       "token": "2132342fsdfsdfadasdqwe",
-      "role": "USUARIO",
+      "role": "ADMINISTRADOR",
       "courseId": ""
     }
   ],

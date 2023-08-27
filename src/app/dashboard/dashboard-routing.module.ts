@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./pages/home/home.component";
 import { adminGuard } from "../core/guards/admin.guard";
+import { InscripcionesModule } from "./pages/inscripciones/inscripciones.module";
 
 const routes: Routes = [
 {
@@ -20,6 +21,10 @@ const routes: Routes = [
     {
     path: 'teachers',
     loadChildren: () => import('./pages/teacher/teacher/teacher.module').then(m => m.TeacherModule)
+    },
+    {
+      path: 'inscripciones',
+      loadChildren: () => import('./pages/inscripciones/inscripciones.module').then(m => m.InscripcionesModule)
     },
     {
     path: '**',
