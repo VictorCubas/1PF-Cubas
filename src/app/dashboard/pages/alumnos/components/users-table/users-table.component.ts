@@ -7,6 +7,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Student } from '../../models';
 import { Teacher } from '../../../teacher/model';
 import { Course } from '../../../courses/model';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectIsAdmin } from 'src/app/store/auth.actions.ts/auth.selectos';
 
 @Component({
   selector: 'app-users-table',
@@ -15,6 +18,7 @@ import { Course } from '../../../courses/model';
 })
 export class UsersTableComponent {
   displayedColumns: string[] = ['id', 'fullName', 'email', 'actions'];
+  public isAdmin$: Observable<boolean>;
 
   @Input()
   dataSource: Student[] | Teacher[] | Course[] = [];
@@ -25,4 +29,8 @@ export class UsersTableComponent {
 
   @Output()
   editUser = new EventEmitter<Student>();
+  
+  constructor(private store: Store){
+    this.isAdmin$ = this.store.select(selectIsAdmin);
+  }
 }

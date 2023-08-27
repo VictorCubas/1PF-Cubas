@@ -2,20 +2,22 @@
   "students": [
     {
       "id": 1,
-      "name": "Marcos",
+      "name": "MARCOS",
       "surname": "Rodriguez",
       "email": "marcos@gmail.com",
       "password": "123456",
-      "token": "adasdqwe",
+      "role": "USUARIO",
+      "token": "adas23423sdfsdf234xfcdsfhje",
       "courseId": 1
     },
     {
       "id": 2,
-      "name": "Julian",
+      "name": "JULIAN",
       "surname": "Perez",
       "email": "julian@gmail.com",
+      "token": "8797890000dfgsf203f234fe",
       "password": "123456",
-      "token": "adasdqweasdsadas",
+      "role": "USUARIO",
       "courseId": 1
     },
     {
@@ -25,6 +27,7 @@
       "email": "maria@gmail.com",
       "password": "123456",
       "token": "adasdq123cwedswe",
+      "role": "USUARIO",
       "courseId": 1
     },
     {
@@ -34,6 +37,7 @@
       "email": "andrea@gmail.com",
       "password": "123456",
       "token": "addfgds45t546gdfg2asdqwe",
+      "role": "USUARIO",
       "courseId": ""
     },
     {
@@ -43,6 +47,7 @@
       "email": "victor@gmail.com",
       "password": "123456",
       "token": "2132342fsdfsdfadasdqwe",
+      "role": "USUARIO",
       "courseId": ""
     }
   ],

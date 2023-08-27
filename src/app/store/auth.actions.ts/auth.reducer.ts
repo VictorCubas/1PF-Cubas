@@ -1,10 +1,10 @@
 import { createReducer, on } from "@ngrx/store";
-import { User } from "src/app/dashboard/pages/users/models";
 import { AuthActions } from "./auth.actions";
+import { Student } from "src/app/dashboard/pages/alumnos/models";
 
 export const authFeatureKey = 'auth';
 export interface AuthState {
-  authUser: User | null;
+  authUser: Student | null;
 }
 
 const initialState: AuthState = {

@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from '../alumnos/components/confirm-dialog/con
 import { Store } from '@ngrx/store';
 import { CoursesActions } from './store/courses.actions';
 import { selectCourses, selectCoursesState } from './store/courses.selectors';
+import { selectIsAdmin } from 'src/app/store/auth.actions.ts/auth.selectos';
 
 
 @Component({
@@ -19,19 +20,21 @@ export class CoursesComponent implements OnInit{
   public destroyed = new Subject<boolean>();
   coursesAsync: Observable<Course[]>;
   numeroCourses: number = 0;
+  public isAdmin$: Observable<boolean>;
 
   constructor(
     private madDialog: MatDialog,
     private coursesService: CoursesService,
     private store: Store){
       this.coursesAsync = this.store.select(selectCourses);
+      this.isAdmin$ = this.store.select(selectIsAdmin);
        
   }
   ngOnInit(): void {
     this.store.dispatch(CoursesActions.loadCourses());
   }
 
-  onCreateUser(): void{
+  onCreateCourse(): void{
     const  dialogRef = this.madDialog.open(UserFormDialogComponent);
 
     dialogRef.afterClosed().subscribe({

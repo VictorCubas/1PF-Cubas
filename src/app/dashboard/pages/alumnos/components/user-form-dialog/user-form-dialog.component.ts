@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Student } from '../../models';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-user-form-dialog',
@@ -25,11 +26,14 @@ export class UserFormDialogComponent {
 
   passwordControl = new FormControl<string | null>(null, Validators.required);
 
+  rolControl = new FormControl<string | null>(null, Validators.required);
+
   userForm = new FormGroup({
     name: this.nameControl,
     surname: this.surnameControl,
     email: this.emailControl,
-    password: this.passwordControl
+    password: this.passwordControl,
+    role: this.rolControl
   })
 
   constructor(
@@ -38,10 +42,12 @@ export class UserFormDialogComponent {
     ){
       if(this.data){
         //estoy editando
+        console.log(this.data.userToEdit.role);
         this.nameControl.setValue(this.data.userToEdit.name);
         this.surnameControl.setValue(this.data.userToEdit.surname);
         this.emailControl.setValue(this.data.userToEdit.email);
         this.passwordControl.setValue(this.data.userToEdit.password);
+        this.rolControl.setValue(this.data.userToEdit.role);
         this.operation = this.data.operation;
       }
   }
@@ -52,7 +58,18 @@ export class UserFormDialogComponent {
       this.userForm.markAllAsTouched();
     }else{
       console.log(this.userForm.value);
-      this.dialogRef.close(this.userForm.value);
+
+      const payload: any = {
+        ...this.userForm.value
+      }
+    
+      //se agrega el token a la data
+      if(this.data?.userToEdit){
+        payload["token"] = this.data.userToEdit.token;
+        payload["courseId"] = this.data.userToEdit.courseId;
+      }
+
+      this.dialogRef.close(payload);
     }
   }
 

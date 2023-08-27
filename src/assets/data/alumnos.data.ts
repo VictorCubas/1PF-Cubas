@@ -8,6 +8,7 @@ export const alumnos: Student[] = [
         email: "marcos@gmail.com",
         password: "123456",
         token: '',
+        role: '',
         courseId: 1
       },
       {
@@ -17,6 +18,7 @@ export const alumnos: Student[] = [
         email: "julian@gmail.com",
         password: "123456",
         token: '',
+        role: '',
         courseId: 1
       },
       {
@@ -26,6 +28,7 @@ export const alumnos: Student[] = [
         email: "maria@gmail.com",
         password: "123456",
         token: '',
+        role: '',
         courseId: 1
       },
       {
@@ -35,6 +38,7 @@ export const alumnos: Student[] = [
         email: "andrea@gmail.com",
         password: "123456",
         token: '',
+        role: '',
         courseId: 1
       },
       {
@@ -44,6 +48,7 @@ export const alumnos: Student[] = [
         email: "victor@gmail.com",
         password: "123456",
         token: '',
+        role: '',
         courseId: 1
       },
 ]

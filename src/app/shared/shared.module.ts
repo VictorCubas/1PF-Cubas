@@ -14,6 +14,7 @@ import { FontSizeDirective } from './directives/fontsize.directive';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatMenuModule,
     MatListModule,
     MatSnackBarModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }
