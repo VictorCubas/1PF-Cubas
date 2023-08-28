@@ -87,5 +87,22 @@
       "email": "course@gmail.com",
       "password": "123456"
     }
+  ],
+  "inscripciones": [
+    {
+      "id": 1,
+      "studentId": 1,
+      "courseId": 1
+    },
+    {
+      "id": 2,
+      "studentId": 2,
+      "courseId": 1
+    },
+    {
+      "id": 2,
+      "studentId": 3,
+      "courseId": 1
+    }
   ]
 }
