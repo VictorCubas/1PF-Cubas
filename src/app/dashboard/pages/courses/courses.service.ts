@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CoursesService {
   private courses: Course[];
-  private courses$ = new BehaviorSubject<Course []>([]);
+  public courses$ = new BehaviorSubject<Course []>([]);
 
   constructor(private httpClient: HttpClient) { 
     this.courses = courses;

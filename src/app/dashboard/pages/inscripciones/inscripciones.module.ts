@@ -7,12 +7,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { InscripcionesEffects } from './store/inscripciones.effects';
 import { inscripcionesFeature } from './store/inscripciones.reducer';
 import { StoreModule } from '@ngrx/store';
+import { InscripcionesDialogComponent } from './components/inscripciones-dialog/inscripciones-dialog.component';
 
 
 
 @NgModule({
   declarations: [
-    InscripcionesComponent
+    InscripcionesComponent,
+    InscripcionesDialogComponent
   ],
   imports: [
     CommonModule,
