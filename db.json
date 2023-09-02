@@ -38,7 +38,7 @@
       "password": "123456",
       "token": "addfgds45t546gdfg2asdqwe",
       "role": "USUARIO",
-      "courseId": ""
+      "courseId": 2
     },
     {
       "id": 5,
@@ -48,41 +48,41 @@
       "password": "123456",
       "token": "2132342fsdfsdfadasdqwe",
       "role": "ADMINISTRADOR",
-      "courseId": ""
+      "courseId": 0
     }
   ],
   "courses": [
     {
       "id": 1,
-      "name": "COURSE_NAME 1",
+      "name": "REACT JS",
       "surname": "COURSE_SURNAME 1",
       "email": "course@gmail.com",
       "password": "123456"
     },
     {
       "id": 2,
-      "name": "COURSE_NAME 2",
+      "name": "JAVA SCRIPT",
       "surname": "COURSE_SURNAME 2",
       "email": "course@gmail.com",
       "password": "123456"
     },
     {
       "id": 3,
-      "name": "COURSE_NAME 3",
+      "name": "ANGULAR",
       "surname": "COURSE_SURNAME 3",
       "email": "course@gmail.com",
       "password": "123456"
     },
     {
       "id": 4,
-      "name": "COURSE_NAME 4",
+      "name": "NODE JS",
       "surname": "COURSE_SURNAME 4",
       "email": "course@gmail.com",
       "password": "123456"
     },
     {
       "id": 5,
-      "name": "COURSE_NAME 5",
+      "name": "PYTHON",
       "surname": "COURSE_SURNAME 5",
       "email": "course@gmail.com",
       "password": "123456"
@@ -113,6 +113,11 @@
       "studentId": 5,
       "courseId": 5,
       "id": 4
+    },
+    {
+      "studentId": 1,
+      "courseId": 2,
+      "id": 5
     }
   ]
 }

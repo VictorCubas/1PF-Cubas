@@ -22,7 +22,7 @@ export class ConfirmDialogComponent {
     this.dialogRef.close(false);
   }
 
-  deleteStudent(): void{
+  deleteData(): void{
     this.dialogRef.close(true);
   }
 }

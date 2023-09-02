@@ -24,7 +24,21 @@ export const reducer = createReducer(
   on(CoursesActions.loadCourses, state => {
     return {
       ...state,
-      courses: courses_mock
+    }
+  }),
+
+
+  on(CoursesActions.loadCoursesSuccess, (state, action) => {
+    return {
+      ...state,
+      courses: action.data,
+    }
+  }),
+
+  on(CoursesActions.loadCoursesFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
     }
   }),
 

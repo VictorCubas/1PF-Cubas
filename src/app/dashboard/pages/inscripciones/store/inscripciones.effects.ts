@@ -78,13 +78,27 @@ export class InscripcionesEffects {
   });
 
   createInscripcionesSuccess = createEffect(() => {
-    return this.actions$.pipe(
+      return this.actions$.pipe(
 
-      ofType(InscripcionesActions.createInscripcionSuccess),
-      map(() => this.store.dispatch(InscripcionesActions.loadInscripcioness()))
-    );
-  },{dispatch: false}
+        ofType(InscripcionesActions.createInscripcionSuccess),
+        map(() => this.store.dispatch(InscripcionesActions.loadInscripcioness()))
+      );
+
+      },{dispatch: false}
   );
+
+  deleteInscripcion$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(InscripcionesActions.deleteInscripcion),
+      concatMap(({ id }) => {
+        
+        return this.deleteInscripcion(id).pipe(
+          map(() => InscripcionesActions.deleteInscripcionSuccess({ id })),
+          catchError(error => of(InscripcionesActions.deleteInscripcionFailure({ error })))
+        );
+      })
+    );
+  });
 
 
   constructor(
@@ -111,5 +125,9 @@ export class InscripcionesEffects {
     return this.httpClient.post<Inscripcion>(environment.baseApiUrl + '/inscripciones', payload);
   }
 
-
+  private deleteInscripcion(id: number): Observable<Inscripcion>{
+    console.log(environment.baseApiUrl + '/inscripciones/' + id);
+    return this.httpClient.delete<Inscripcion>(environment.baseApiUrl + '/inscripciones/' + id);
+    // console.log('eliminando con redux....');
+  }
 }

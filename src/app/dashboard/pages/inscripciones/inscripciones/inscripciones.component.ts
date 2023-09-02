@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { InscripcionesActions } from '../store/inscripciones.actions';
 import { Observable } from 'rxjs';
-import { InscripcionWithStudentAndCourse } from '../models';
+import { Inscripcion, InscripcionWithStudentAndCourse } from '../models';
 import { selectInscripciones } from '../store/inscripciones.selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { InscripcionesDialogComponent } from '../components/inscripciones-dialog/inscripciones-dialog.component';
+import { ConfirmDialogComponent } from '../../alumnos/components/confirm-dialog/confirm-dialog.component';
+import { Student } from '../../alumnos/models';
 
 @Component({
   selector: 'app-inscripciones',
@@ -17,7 +19,8 @@ export class InscripcionesComponent implements OnInit{
   inscripciones$: Observable<InscripcionWithStudentAndCourse []>;
 
   constructor(private store: Store,
-    private matDiaglo: MatDialog){
+    private matDiaglo: MatDialog,
+    private matDialog: MatDialog){
     this.inscripciones$ = this.store.select(selectInscripciones);
   }
 
@@ -27,5 +30,25 @@ export class InscripcionesComponent implements OnInit{
 
   onAdd(): void{
     this.matDiaglo.open(InscripcionesDialogComponent);
+  }
+
+  onDeleteInscripcion(inscripcionToDelete: Inscripcion): void {
+    const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
+      width: '370px',
+      data: { mensaje: `¿Estás seguro que quieres eliminar a esta inscripcion con id (${inscripcionToDelete.id}) de la lista?`,
+            titulo: 'Confirmación de eliminación'}
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if (result) {
+        //this.alumnosService.deleteAlumnoById(userToDelete.id);
+        // console.log(result)
+
+        //this.store.dispatch(InscripcionesActions.loadInscripcioness())
+        console.log(inscripcionToDelete)
+        this.store.dispatch(InscripcionesActions.deleteInscripcion({id: inscripcionToDelete.id}))
+      }
+    });
   }
 }

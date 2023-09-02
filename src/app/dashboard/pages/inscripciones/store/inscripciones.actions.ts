@@ -22,5 +22,9 @@ export const InscripcionesActions = createActionGroup({
     'Create Inscripcion': props<{payload: CreateInscripcionPayload}>(),
     'Create Inscripcion Success': props<{data: Inscripcion}>(),
     'Create Inscripcion Failure': props<{error: HttpErrorResponse}>(),
+
+    'Delete Inscripcion': props<{ id: number }>(),
+    'Delete Inscripcion Success': props<{ id: number }>(),
+    'Delete Inscripcion Failure': props<{ error: HttpErrorResponse }>(),
   }
 });

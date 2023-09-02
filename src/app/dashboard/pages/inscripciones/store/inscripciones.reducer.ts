@@ -67,11 +67,17 @@ export const reducer = createReducer(
       ...state,
       studentOptions: action.data
     }
-  })
+  }),
+
+  on(InscripcionesActions.deleteInscripcionSuccess, (state, action) => {
+    return {
+      ...state,
+      inscripcion: action
+    }
+  }),
 );
 
 export const inscripcionesFeature = createFeature({
   name: inscripcionesFeatureKey,
   reducer,
 });
-
