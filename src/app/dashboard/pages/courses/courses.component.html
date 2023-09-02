@@ -6,12 +6,12 @@
 </div>
 
 <p appFontSize="20px">
-    El módulo que permite administrar y gestionar los profesores registrados en el sistema
+    El módulo que permite administrar y gestionar los cursos registrados en el sistema
 </p>
 
 <!-- TABLA PARA LA VISTA -->
-<app-users-table 
+<app-courses-table 
     [dataSource]="(coursesAsync | async) || []"
     (deleteUser)="onDeleteUser($event)"
     (editUser)="onEditUser($event)">
-</app-users-table>
+</app-courses-table>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, Subject, map, tap } from 'rxjs';
+import { Observable, Subject, map, takeUntil, tap } from 'rxjs';
 import { Course } from './model';
 import { CoursesService } from './courses.service';
 import { UserFormDialogComponent } from '../alumnos/components/user-form-dialog/user-form-dialog.component';
@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { CoursesActions } from './store/courses.actions';
 import { selectCourses, selectCoursesState } from './store/courses.selectors';
 import { selectIsAdmin } from 'src/app/store/auth.actions.ts/auth.selectos';
+import { CourseFormDialogComponent } from './components/course-form-dialog/course-form-dialog.component';
 
 
 @Component({
@@ -28,14 +29,26 @@ export class CoursesComponent implements OnInit{
     private store: Store){
       this.coursesAsync = this.store.select(selectCourses);
       this.isAdmin$ = this.store.select(selectIsAdmin);
-       
+
+      this.coursesAsync
+      .pipe(
+        map((courses) => courses.length),
+        takeUntil(this.destroyed)
+      )
+      .subscribe((length) => {
+        this.numeroCourses = length;
+      });
   }
+
   ngOnInit(): void {
     this.store.dispatch(CoursesActions.loadCourses());
   }
 
   onCreateCourse(): void{
-    const  dialogRef = this.madDialog.open(UserFormDialogComponent);
+    const isCourseModule = true;
+
+    const  dialogRef = this.madDialog.open(CourseFormDialogComponent,{
+    });
 
     dialogRef.afterClosed().subscribe({
       next: (v) => {
@@ -43,12 +56,14 @@ export class CoursesComponent implements OnInit{
           const nuevoCourse: Course = {
               id: this.numeroCourses + 1,
               name: v.name,
-              email: v.email,
-              password: v.password,
-              surname: v.surname
+              description: v.description
           }
 
-          this.coursesService.createCourse(nuevoCourse);
+          console.log(nuevoCourse)
+           this.coursesService.createCourse(nuevoCourse);
+
+           //se carga nuevamente los courses
+           this.store.dispatch(CoursesActions.loadCourses());
         }
       }
     });
@@ -69,12 +84,12 @@ export class CoursesComponent implements OnInit{
   }
 
 
-  onEditUser(userToEdit: Course): void{
-    console.log(userToEdit)
+  onEditUser(dataToEdit: Course): void{
+    console.log(dataToEdit)
 
-    const dialogRef = this.madDialog.open(UserFormDialogComponent,  {
+    const dialogRef = this.madDialog.open(CourseFormDialogComponent,  {
       data : {
-        userToEdit: userToEdit,
+        dataToEdit: dataToEdit,
         operation: 'Editar'
       }
     });
@@ -82,8 +97,10 @@ export class CoursesComponent implements OnInit{
     dialogRef.afterClosed().subscribe({
       next: (dataUpdate) => {
 
+        console.log(dataUpdate);
         if(dataUpdate){
-          this.coursesService.updateCourse({'id': userToEdit.id ,...dataUpdate});
+          this.coursesService.updateCourse({'id': dataToEdit.id ,...dataUpdate});
+          this.store.dispatch(CoursesActions.loadCourses());
         }
       }
     })

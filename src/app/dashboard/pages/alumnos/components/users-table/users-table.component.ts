@@ -21,7 +21,7 @@ export class UsersTableComponent {
   public isAdmin$: Observable<boolean>;
 
   @Input()
-  dataSource: Student[] | Teacher[] | Course[] = [];
+  dataSource: Student[] | Teacher[] = [];
 
   // practicar un poco mas esta parte
   @Output()
