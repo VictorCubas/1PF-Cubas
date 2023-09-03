@@ -100,7 +100,6 @@ export class InscripcionesEffects {
     );
   });
 
-
   constructor(
     private actions$: Actions,
     private httpClient: HttpClient,
@@ -126,7 +125,7 @@ export class InscripcionesEffects {
   }
 
   private deleteInscripcion(id: number): Observable<Inscripcion>{
-    console.log(environment.baseApiUrl + '/inscripciones/' + id);
+    // console.log(environment.baseApiUrl + '/inscripciones/' + id);
     return this.httpClient.delete<Inscripcion>(environment.baseApiUrl + '/inscripciones/' + id);
     // console.log('eliminando con redux....');
   }

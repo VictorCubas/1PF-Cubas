@@ -4,6 +4,8 @@ import { courses } from 'src/assets/data/courses.data';
 import { Course } from './model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Store } from '@ngrx/store';
+import { CoursesActions } from './store/courses.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,9 @@ export class CoursesService {
   private courses: Course[];
   public courses$ = new BehaviorSubject<Course []>([]);
 
-  constructor(private httpClient: HttpClient) { 
+  constructor(
+      private httpClient: HttpClient,
+      private store: Store) { 
     this.courses = courses;
     this.loadCourses();
   }
@@ -53,6 +57,8 @@ export class CoursesService {
     ).subscribe({
       next: (nuevoArray) => {
         this.courses$.next(nuevoArray);
+        //se carga nuevamente los courses
+        this.store.dispatch(CoursesActions.loadCourses());
       }
     });
   }
@@ -60,16 +66,23 @@ export class CoursesService {
   updateCourse(course: Course): void{
     this.httpClient.put(environment.baseApiUrl + '/courses/' + course.id, course)
     .subscribe({
-      next: () => {}
+      next: () => {
+        this.store.dispatch(CoursesActions.loadCourses());
+      }
     })
   }
 
   deleteCourseById(id: number): void{
-    this.courses = this.courses.filter(course => course.id !== id);
-    console.log(this.courses);
+    // this.courses = this.courses.filter(course => course.id !== id);
+    // console.log(this.courses);
 
-    //emitimos
-    this.courses$.next(this.courses);
+    // //emitimos
+    // this.courses$.next(this.courses);
+
+    this.httpClient.delete(environment.baseApiUrl + '/courses/' + id)
+    .subscribe({
+      next: () => {this.store.dispatch(CoursesActions.loadCourses());}
+    })
   }
 
   getCourseById(id: number): Observable<Course | null> {

@@ -61,30 +61,29 @@ export class CoursesComponent implements OnInit{
 
           console.log(nuevoCourse)
            this.coursesService.createCourse(nuevoCourse);
-
-           //se carga nuevamente los courses
-           this.store.dispatch(CoursesActions.loadCourses());
         }
       }
     });
   }
 
-  onDeleteUser(userToDelete: Course): void {
+  onDeleteCourse(courseToDelete: Course): void {
     const dialogRef = this.madDialog.open(ConfirmDialogComponent, {
       width: '370px',
-      data: { mensaje: `¿Estás seguro que quieres eliminar a este curso (${userToDelete.name?.toUpperCase()}) de la lista?`,
+      data: { mensaje: `¿Estás seguro que quieres eliminar a este curso (${courseToDelete.name?.toUpperCase()}) 
+            de la lista? 
+            AL ELIMINAR ESTE CURSO TAMBIEN SE ELIMINARA LAS INSCRIPCIONES DEL MISMO`,
             titulo: 'Confirmación de eliminación'}
     });
     
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.coursesService.deleteCourseById(userToDelete.id);
+        this.coursesService.deleteCourseById(courseToDelete.id);
       }
     });
   }
 
 
-  onEditUser(dataToEdit: Course): void{
+  onEditCurse(dataToEdit: Course): void{
     console.log(dataToEdit)
 
     const dialogRef = this.madDialog.open(CourseFormDialogComponent,  {
@@ -100,7 +99,6 @@ export class CoursesComponent implements OnInit{
         console.log(dataUpdate);
         if(dataUpdate){
           this.coursesService.updateCourse({'id': dataToEdit.id ,...dataUpdate});
-          this.store.dispatch(CoursesActions.loadCourses());
         }
       }
     })

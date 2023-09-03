@@ -12,6 +12,6 @@
 <!-- TABLA PARA LA VISTA -->
 <app-courses-table 
     [dataSource]="(coursesAsync | async) || []"
-    (deleteUser)="onDeleteUser($event)"
-    (editUser)="onEditUser($event)">
+    (deleteUser)="onDeleteCourse($event)"
+    (editUser)="onEditCurse($event)">
 </app-courses-table>

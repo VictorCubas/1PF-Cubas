@@ -42,12 +42,12 @@ export class InscripcionesComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
       if (result) {
-        //this.alumnosService.deleteAlumnoById(userToDelete.id);
-        // console.log(result)
-
-        //this.store.dispatch(InscripcionesActions.loadInscripcioness())
         console.log(inscripcionToDelete)
-        this.store.dispatch(InscripcionesActions.deleteInscripcion({id: inscripcionToDelete.id}))
+        this.store.dispatch(InscripcionesActions.deleteInscripcion({id: inscripcionToDelete.id}));
+
+        setTimeout(() => {
+          this.store.dispatch(InscripcionesActions.loadInscripcioness());
+        }, 300);
       }
     });
   }

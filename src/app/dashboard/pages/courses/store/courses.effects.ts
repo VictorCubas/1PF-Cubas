@@ -11,17 +11,6 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class CoursesEffects {
 
-
-  // loadCoursess$ = createEffect(() => {
-  //   return this.actions$.pipe(
-
-  //     ofType(CoursesActions.loadCourses),
-  //     /** An EMPTY observable only emits completion. Replace with your own observable API request */
-  //     concatMap(() => EMPTY as Observable<{ type: string }>)
-  //   );
-  // });
-
-
   loadCoursess$ = createEffect(() => {
     return this.actions$.pipe(
 

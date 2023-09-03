@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { alumnos } from 'src/assets/data/alumnos.data';
 import { Student } from './models';
-import { BehaviorSubject, Observable, Subject, map, mergeMap, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, forkJoin, map, mergeMap, switchMap, take } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Inscripcion } from '../inscripciones/models';
 
 @Injectable({
   providedIn: 'root'
@@ -82,7 +83,17 @@ export class AlumnosService {
     );
   }
 
-  getAlumnosByCourseId(courseId:number): Observable<Student[]>{
-    return this.httpClient.get<Student []>(environment.baseApiUrl + "/students?courseId=" + courseId)
+  getAlumnosByCourseId(courseId: number): Observable<Student[]> {
+    const inscripcionesUrl = environment.baseApiUrl + `/inscripciones?courseId=${courseId}`;
+
+    return this.httpClient.get<any[]>(inscripcionesUrl).pipe(
+      mergeMap(inscripciones => {
+        const observables = inscripciones.map(inscripcion => {
+          const studentsUrl = environment.baseApiUrl + `/students/${inscripcion.studentId}`;
+          return this.httpClient.get<Student>(studentsUrl);
+        });
+        return forkJoin(observables);
+      })
+    );
   }
 }
