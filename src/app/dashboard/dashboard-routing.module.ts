@@ -11,7 +11,7 @@ const routes: Routes = [
     },
     {
       path: 'students',
-      canActivate: [adminGuard],
+      // canActivate: [adminGuard],
       loadChildren: () => import('./pages/alumnos/alumnos.module').then(m => m.AlmunosModule)
     },
     {

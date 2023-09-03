@@ -1,9 +1,10 @@
 <mat-nav-list>
     <!-- <a mat-list-item href="..." *ngFor="let link of links" [activated]="link.isActive">{{ link }}</a> -->
     <a routerLink="home" mat-list-item>Inicio</a>
-    <a *ngIf="selectIsAdmin$ | async" routerLink="students" mat-list-item>Alumnos</a>
+    <!-- <a *ngIf="selectIsAdmin$ | async" routerLink="students" mat-list-item>Alumnos</a> -->
+    <a routerLink="students" mat-list-item>Alumnos</a>
     <a routerLink="courses" mat-list-item>Cursos</a>
-    <a *ngIf="selectIsAdmin$ | async" routerLink="inscripciones" mat-list-item>Inscripciones</a>
+    <a routerLink="inscripciones" mat-list-item>Inscripciones</a>
     <a *ngIf="selectIsAdmin$ | async" routerLink="teachers" mat-list-item>Profesores</a>
     <a (click)="logout()" mat-list-item>Log out</a>
 </mat-nav-list>
