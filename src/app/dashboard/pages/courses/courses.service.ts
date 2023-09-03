@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, map, mergeMap, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, forkJoin, map, mergeMap, take } from 'rxjs';
 import { courses } from 'src/assets/data/courses.data';
 import { Course } from './model';
 import { HttpClient } from '@angular/common/http';
@@ -89,6 +89,21 @@ export class CoursesService {
     return this.courses$.pipe(
       map(courses => courses.find(course => course.id === id) || null),
       take(1)
+    );
+  }
+
+
+  getCoursesByStudentId(studentId: number): Observable<Course[]> {
+    const inscripcionesUrl = environment.baseApiUrl + `/inscripciones?studentId=${studentId}`;
+
+    return this.httpClient.get<any[]>(inscripcionesUrl).pipe(
+      mergeMap(inscripciones => {
+        const observables = inscripciones.map(inscripcion => {
+          const studentsUrl = environment.baseApiUrl + `/courses/${inscripcion.courseId}`;
+          return this.httpClient.get<Course>(studentsUrl);
+        });
+        return forkJoin(observables);
+      })
     );
   }
   

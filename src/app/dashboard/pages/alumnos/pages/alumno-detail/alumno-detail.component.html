@@ -1,7 +1,40 @@
 <button routerLink=".." mat-icon-button>
     <mat-icon>arrow_back</mat-icon>
 </button>
-
+<!-- 
 <pre>
     {{alumno | json}}
-</pre>
+</pre> -->
+
+
+<div class="student-details">
+    <h2>Detalles del Estudiante</h2>
+    <p><strong>ID:</strong> {{ alumno?.id }}</p>
+    <p><strong>Nombre:</strong> {{ alumno?.name }}</p>
+    <p><strong>Apellido:</strong> {{ alumno?.surname }}</p>
+    <p><strong>Email:</strong> {{ alumno?.email }}</p>
+    <p><strong>Rol:</strong> {{ alumno?.role }}</p>
+    <!-- <p><strong>Token:</strong> {{ alumno?.token }}</p> -->
+</div>
+
+<!-- <h1>Detalle del curso: {{ courseName$ | async}}</h1> -->
+<br><h3><b>MIS CURSOS</b></h3>
+
+<table mat-table [dataSource]="(courses$ | async) || []" class="mat-elevation-z8">
+    <!-- Column 1 -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- Column 2 -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name Del Curso </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
