@@ -1,0 +1,19 @@
+<button routerLink=".." mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+</button>
+
+<div class="student-details">
+    <h2>Detalles del Estudiante</h2>
+    <p><strong>ID:</strong> {{ alumno?.id }}</p>
+    <p><strong>Nombre:</strong> {{ alumno?.name }}</p>
+    <p><strong>Apellido:</strong> {{ alumno?.surname }}</p>
+    <p><strong>Email:</strong> {{ alumno?.email }}</p>
+    <p><strong>Rol:</strong> {{ alumno?.role }}</p>
+</div>
+
+<div class="course-details">
+    <h2>Detalles del Curso</h2>
+    <p><strong>ID:</strong> {{ course?.id }}</p>
+    <p><strong>Nombre:</strong> {{ course?.name }}</p>
+    <p><strong>Descripcion:</strong> {{ course?.description }}</p>
+</div>

@@ -8,6 +8,7 @@ import { InscripcionesEffects } from './store/inscripciones.effects';
 import { inscripcionesFeature } from './store/inscripciones.reducer';
 import { StoreModule } from '@ngrx/store';
 import { InscripcionesDialogComponent } from './components/inscripciones-dialog/inscripciones-dialog.component';
+import { InscripcionesDetailsModule } from './pages/inscripciones-details/inscripciones-details.module';
 
 
 
@@ -19,6 +20,7 @@ import { InscripcionesDialogComponent } from './components/inscripciones-dialog/
   imports: [
     CommonModule,
     InscripcionesRoutingModule,
+    InscripcionesDetailsModule,
     SharedModule,
     StoreModule.forFeature(inscripcionesFeature),
     EffectsModule.forFeature([InscripcionesEffects])

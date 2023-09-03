@@ -108,6 +108,11 @@
       "studentId": 1,
       "courseId": 2,
       "id": 5
+    },
+    {
+      "studentId": 5,
+      "courseId": 4,
+      "id": 6
     }
   ]
 }

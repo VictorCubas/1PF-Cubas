@@ -11,6 +11,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const isAdmin = inject(Store).select(selectIsAdmin).pipe(
     map((isAdmin) => {
       console.log(adminGuard.name, "Redirigiendo al inicio");
+      console.log(isAdmin)
       return isAdmin  ? true: router.createUrlTree(['/dashboard/home']);
     })
   )

@@ -34,10 +34,12 @@ export class AuthService{
                     const authUser = response[0];
 
                     this.store.dispatch(AuthActions.setAuthUser({payload: authUser}))
-                    this.router.navigate(['dashboard'], {})
 
                     localStorage.setItem('token', authUser.token);
                     this.isAuthenticated = true;
+                    console.log('si, estoy autenticado')
+
+                    this.router.navigate(['dashboard'], {})
                 }
                 else{
                     this.showSnackbar('Credenciales incorrectas', 'error-snackbar');

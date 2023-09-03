@@ -23,5 +23,6 @@ export class NavMenuComponent {
   logout(): void{
     this.authService.logout()
     this.router.navigate(['auth'], {})
+    localStorage.removeItem("token");
   }
 }
