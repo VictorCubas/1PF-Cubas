@@ -27,6 +27,10 @@ const routes: Routes = [
       loadChildren: () => import('./pages/inscripciones/inscripciones.module').then(m => m.InscripcionesModule)
     },
     {
+      path: 'usuarios',
+      loadChildren: () => import('./pages/usuarios/usuarios.module').then(m => m.UsuariosModule)
+    },
+    {
     path: '**',
     component: HomeComponent
     }

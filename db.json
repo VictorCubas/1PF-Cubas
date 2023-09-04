@@ -6,7 +6,7 @@
       "surname": "Rodriguez",
       "email": "marcos@gmail.com",
       "password": "123456",
-      "role": "USUARIO",
+      "role": "ESTUDIANTE",
       "token": "adas23423sdfsdf234xfcdsfhje"
     },
     {
@@ -113,6 +113,40 @@
       "studentId": 5,
       "courseId": 4,
       "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "USER_NAME 4",
+      "surname": "USER_SURNAME 4",
+      "email": "user4@gmail.com",
+      "password": "123456",
+      "role": "USUARIO"
+    },
+    {
+      "id": 1,
+      "name": "USER_NAME 2",
+      "surname": "USER_SURNAME 2",
+      "email": "user@gmail.com",
+      "password": "123456",
+      "role": "ADMINISTRADOR"
+    },
+    {
+      "id": 1,
+      "name": "USER_NAME 3",
+      "surname": "USER_SURNAME 3",
+      "email": "user@gmail.com",
+      "password": "123456",
+      "role": "ADMINISTRADOR"
+    },
+    {
+      "id": 1,
+      "name": "USER_NAME 4",
+      "surname": "USER_SURNAME 4",
+      "email": "user@gmail.com",
+      "password": "123456",
+      "role": "ADMINISTRADOR"
     }
   ]
 }

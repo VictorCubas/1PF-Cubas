@@ -1,15 +1,16 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Student } from '../../models';
-import { Store } from '@ngrx/store';
+import { User } from '../../../users/models';
+import { Inject } from '@angular/core';
+
 
 @Component({
-  selector: 'app-user-form-dialog',
-  templateUrl: './user-form-dialog.component.html',
-  styleUrls: ['./user-form-dialog.component.scss']
+  selector: 'app-usuarios-form-dialog',
+  templateUrl: './usuarios-form-dialog.component.html',
+  styleUrls: ['./usuarios-form-dialog.component.scss']
 })
-export class UserFormDialogComponent {
+export class UsuariosFormDialogComponent {
   operation: string | null = 'Agregar';
 
   nameControl = new FormControl<string | null>(null, [
@@ -26,7 +27,7 @@ export class UserFormDialogComponent {
 
   passwordControl = new FormControl<string | null>(null, Validators.required);
 
-  rolControl = new FormControl<string | null>('ESTUDIANTE', Validators.required);
+  rolControl = new FormControl<string | null>(null, Validators.required);
 
   userForm = new FormGroup({
     name: this.nameControl,
@@ -37,10 +38,12 @@ export class UserFormDialogComponent {
   })
 
   constructor(
-    private dialogRef: MatDialogRef<UserFormDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data?: {userToEdit: Student, operation: string},
+    private dialogRef: MatDialogRef<UsuariosFormDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private data?: {userToEdit: User, operation: string},
     ){
       if(this.data){
+        //estoy editando
+        // console.log(this.data.userToEdit.role);
         this.nameControl.setValue(this.data.userToEdit.name);
         this.surnameControl.setValue(this.data.userToEdit.surname);
         this.emailControl.setValue(this.data.userToEdit.email);
@@ -51,11 +54,10 @@ export class UserFormDialogComponent {
   }
 
   onSubmit(): void{
-    // alert(JSON.stringify(this.userForm.value));
     if(this.userForm.invalid){
       this.userForm.markAllAsTouched();
     }else{
-      console.log(this.userForm.value);
+      // console.log(this.userForm.value);
 
       const payload: any = {
         ...this.userForm.value
@@ -63,8 +65,8 @@ export class UserFormDialogComponent {
     
       //se agrega el token a la data
       if(this.data?.userToEdit){
-        payload["token"] = this.data.userToEdit.token;
-        payload["courseId"] = this.data.userToEdit.courseId;
+        // payload["token"] = this.data.userToEdit.token;
+        // payload["courseId"] = this.data.userToEdit.courseId;
       }
 
       this.dialogRef.close(payload);

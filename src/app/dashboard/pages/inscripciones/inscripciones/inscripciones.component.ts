@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { InscripcionesDialogComponent } from '../components/inscripciones-dialog/inscripciones-dialog.component';
 import { ConfirmDialogComponent } from '../../alumnos/components/confirm-dialog/confirm-dialog.component';
 import { Student } from '../../alumnos/models';
+import { ToolbarTitleService } from 'src/app/dashboard/layout/toolbar/toolbar-title.service';
 
 @Component({
   selector: 'app-inscripciones',
@@ -20,7 +21,9 @@ export class InscripcionesComponent implements OnInit{
 
   constructor(private store: Store,
     private matDiaglo: MatDialog,
-    private matDialog: MatDialog){
+    private matDialog: MatDialog,
+    private toolbarTitleService: ToolbarTitleService){
+      this.toolbarTitleService.setTitle('INSCRIPCIONES');
     this.inscripciones$ = this.store.select(selectInscripciones);
   }
 
@@ -40,9 +43,9 @@ export class InscripcionesComponent implements OnInit{
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
+      // console.log(result)
       if (result) {
-        console.log(inscripcionToDelete)
+        // console.log(inscripcionToDelete)
         this.store.dispatch(InscripcionesActions.deleteInscripcion({id: inscripcionToDelete.id}));
 
         setTimeout(() => {

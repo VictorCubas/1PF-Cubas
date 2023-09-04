@@ -1,13 +1,3 @@
-<!-- <button routerLink=".." mat-icon-button>
-    <mat-icon>arrow_back</mat-icon>
-</button> -->
-
-<!-- <pre>
-    {{ inscripciones$ | async | json }}
-</pre> -->
-<h1>INSCRIPCIONES</h1>
-<!-- <h1>Detalle del curso: {{ courseName$ | async}}</h1> -->
-<!-- <h3>ALUMNOS INSCRIPTOS AL CURSO</h3> -->
 
 <div class="mb-3">
   <button (click)="onAdd()" mat-flat-button color="primary" type="button">
@@ -36,26 +26,12 @@
     </ng-container>
 
     <!-- Column 4 -->
-    <!-- <ng-container matColumnDef="total">
-        <th mat-header-cell *matHeaderCellDef> Total </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container> -->
-
-    <!-- Column 4 -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let element"> 
         <button [routerLink]="element.id" routerLinkActive="router-link-active"  mat-icon-button color="primary">
           <mat-icon>visibility</mat-icon>
         </button>
-
-        <!-- <button [disabled]="!(isAdmin$ | async)" (click)="editUser.emit(element)" mat-icon-button color="primary">
-          <mat-icon>edit</mat-icon>
-        </button> -->
-
-        <!-- <button [disabled]="!(isAdmin$ | async)" (click)="deleteUser.emit(element)" mat-icon-button color="warn">
-          <mat-icon>delete</mat-icon>
-        </button> -->
 
         <button (click)="onDeleteInscripcion(element)" mat-icon-button color="warn">
           <mat-icon>delete</mat-icon>

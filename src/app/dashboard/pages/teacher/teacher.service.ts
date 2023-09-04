@@ -45,7 +45,7 @@ export class TeacherService {
 
   deleteTeacherById(id: number): void{
     this.teachers = this.teachers.filter(teacher => teacher.id !== id);
-    console.log(this.teachers);
+    // console.log(this.teachers);
 
     //emitimos
     this.teachers$.next(this.teachers);

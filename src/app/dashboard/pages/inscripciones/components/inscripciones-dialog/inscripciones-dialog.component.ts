@@ -40,7 +40,7 @@ export class InscripcionesDialogComponent implements OnInit {
       this.inscripcionForm.markAllAsTouched();
     }
     else{
-      console.log(this.inscripcionForm.getRawValue());
+      // console.log(this.inscripcionForm.getRawValue());
       this.store.dispatch(InscripcionesActions.createInscripcion({payload: this.inscripcionForm.getRawValue()}))
       this.matDialogRef.close();
     }

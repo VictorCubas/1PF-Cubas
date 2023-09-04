@@ -6,6 +6,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { Observable, Subject, map, tap } from 'rxjs';
 import { AlumnosService } from './alumnos.service';
 import { generateRandomString } from 'src/app/shared/utils/helpers';
+import { ToolbarTitleService } from '../../layout/toolbar/toolbar-title.service';
 
 
 @Component({
@@ -21,7 +22,10 @@ export class AlumnosComponent implements OnDestroy{
   
     constructor(
       private madDialog: MatDialog,
-      private alumnosService: AlumnosService){
+      private alumnosService: AlumnosService,
+      private toolbarTitleService: ToolbarTitleService){
+          this.toolbarTitleService.setTitle('Alumno');
+
           this.alumnosAsync = this.alumnosService.getAlumnos().pipe(
             map(alumnos => alumnos.map(alumno => ({
               ...alumno, // Mantenemos todas las propiedades del alumno original
@@ -59,7 +63,7 @@ export class AlumnosComponent implements OnDestroy{
     }
 
     onEditUser(userToEdit: Student): void{
-      console.log(userToEdit)
+      // console.log(userToEdit)
 
       const dialogRef = this.madDialog.open(UserFormDialogComponent,  {
         data : {

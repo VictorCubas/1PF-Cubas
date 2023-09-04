@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{operation}} Alumno</h1>
+<h1 mat-dialog-title>{{operation}} Usuario</h1>
 <div mat-dialog-content>
     <form [formGroup]="userForm" class="grid">
 
@@ -45,9 +45,9 @@
             <mat-form-field class="w-full">
                 <mat-label>Rol</mat-label>
                 <mat-select [formControl] = "rolControl">
-                    <!-- <mat-option value="ADMINISTRADOR">ADMINISTRADOR</mat-option>
-                    <mat-option value="USUARIO">USUARIO</mat-option> -->
-                    <mat-option value="ESTUDIANTE">ESTUDIANTE</mat-option>
+                    <mat-option value="ADMINISTRADOR">ADMINISTRADOR</mat-option>
+                    <mat-option value="USUARIO">USUARIO</mat-option>
+                    <!-- <mat-option value="ESTUDIANTE">ESTUDIANTE</mat-option> -->
                 </mat-select>
             </mat-form-field>
         </div>

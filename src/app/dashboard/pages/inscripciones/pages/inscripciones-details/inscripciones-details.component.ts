@@ -39,7 +39,7 @@ export class InscripcionesDetailsComponent {
 
   loadAlumno(){
     if(this.inscripcionId){
-      console.log(environment.baseApiUrl + '/inscripciones?id=' + this.inscripcionId + '&_expand=course&_expand=student');
+      // console.log(environment.baseApiUrl + '/inscripciones?id=' + this.inscripcionId + '&_expand=course&_expand=student');
       this.httpClient.get<Course []>(environment.baseApiUrl + '/inscripciones?id=' + this.inscripcionId + '&_expand=course&_expand=student')
       .subscribe({
         next: (response) => {

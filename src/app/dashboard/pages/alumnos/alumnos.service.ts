@@ -64,7 +64,7 @@ export class AlumnosService {
   }
 
   deleteAlumnoById(id: number): void{
-    console.log('ELIMINANDO.....');
+    // console.log('ELIMINANDO.....');
     this.httpClient.delete(environment.baseApiUrl + '/students/' + id)
     .pipe(
       mergeMap((usuarioEliminado) => this.alumnos$.pipe(

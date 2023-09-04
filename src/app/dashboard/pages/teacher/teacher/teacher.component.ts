@@ -5,6 +5,7 @@ import { UserFormDialogComponent } from '../../alumnos/components/user-form-dial
 import { Teacher } from '../model';
 import { TeacherService } from '../teacher.service';
 import { ConfirmDialogComponent } from '../../alumnos/components/confirm-dialog/confirm-dialog.component';
+import { ToolbarTitleService } from 'src/app/dashboard/layout/toolbar/toolbar-title.service';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class TeacherComponent {
 
   constructor(
     private madDialog: MatDialog,
-    private teachersService: TeacherService){
+    private teachersService: TeacherService,
+    private toolbarTitleService: ToolbarTitleService){
+        this.toolbarTitleService.setTitle('profesores');
         this.teachersAsync = this.teachersService.getTeachers().pipe(
           map(teachers => teachers.map(profesor => ({
             ...profesor, // Mantenemos todas las propiedades del profesor original
@@ -67,7 +70,7 @@ export class TeacherComponent {
 
 
   onEditUser(userToEdit: Teacher): void{
-    console.log(userToEdit)
+    // console.log(userToEdit)
 
     const dialogRef = this.madDialog.open(UserFormDialogComponent,  {
       data : {

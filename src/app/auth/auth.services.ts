@@ -37,7 +37,7 @@ export class AuthService{
 
                     localStorage.setItem('token', authUser.token);
                     this.isAuthenticated = true;
-                    console.log('si, estoy autenticado')
+                    // console.log('si, estoy autenticado')
 
                     this.router.navigate(['dashboard'], {})
                 }

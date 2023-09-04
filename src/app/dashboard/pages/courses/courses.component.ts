@@ -10,6 +10,7 @@ import { CoursesActions } from './store/courses.actions';
 import { selectCourses, selectCoursesState } from './store/courses.selectors';
 import { selectIsAdmin } from 'src/app/store/auth.actions.ts/auth.selectos';
 import { CourseFormDialogComponent } from './components/course-form-dialog/course-form-dialog.component';
+import { ToolbarTitleService } from '../../layout/toolbar/toolbar-title.service';
 
 
 @Component({
@@ -26,7 +27,9 @@ export class CoursesComponent implements OnInit{
   constructor(
     private madDialog: MatDialog,
     private coursesService: CoursesService,
-    private store: Store){
+    private store: Store,
+    private toolbarTitleService: ToolbarTitleService){
+      this.toolbarTitleService.setTitle('cursos');
       this.coursesAsync = this.store.select(selectCourses);
       this.isAdmin$ = this.store.select(selectIsAdmin);
 
@@ -59,7 +62,7 @@ export class CoursesComponent implements OnInit{
               description: v.description
           }
 
-          console.log(nuevoCourse)
+          // console.log(nuevoCourse)
            this.coursesService.createCourse(nuevoCourse);
         }
       }
@@ -84,7 +87,7 @@ export class CoursesComponent implements OnInit{
 
 
   onEditCurse(dataToEdit: Course): void{
-    console.log(dataToEdit)
+    // console.log(dataToEdit)
 
     const dialogRef = this.madDialog.open(CourseFormDialogComponent,  {
       data : {
@@ -96,7 +99,7 @@ export class CoursesComponent implements OnInit{
     dialogRef.afterClosed().subscribe({
       next: (dataUpdate) => {
 
-        console.log(dataUpdate);
+        // console.log(dataUpdate);
         if(dataUpdate){
           this.coursesService.updateCourse({'id': dataToEdit.id ,...dataUpdate});
         }
