@@ -6,5 +6,4 @@ export interface Student{
     password: string;
     token: string;
     role: "ADMINISTRADOR" | "USUARIO" | "ESTUDIANTE" | "";
-    courseId: number;
 }

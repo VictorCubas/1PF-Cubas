@@ -53,7 +53,6 @@ export class AlumnosComponent implements OnDestroy{
                 surname: v.surname,
                 token: token,
                 role: v.role,
-                courseId: 0
             }
 
             this.alumnosService.createAlumno(nuevoAlumno);

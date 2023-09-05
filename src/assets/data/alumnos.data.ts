@@ -9,7 +9,6 @@ export const alumnos: Student[] = [
         password: "123456",
         token: '',
         role: '',
-        courseId: 1
       },
       {
         id: 2,
@@ -19,7 +18,6 @@ export const alumnos: Student[] = [
         password: "123456",
         token: '',
         role: '',
-        courseId: 1
       },
       {
         id: 3,
@@ -29,7 +27,6 @@ export const alumnos: Student[] = [
         password: "123456",
         token: '',
         role: '',
-        courseId: 1
       },
       {
         id: 4,
@@ -39,7 +36,6 @@ export const alumnos: Student[] = [
         password: "123456",
         token: '',
         role: '',
-        courseId: 1
       },
       {
         id: 5,
@@ -49,6 +45,5 @@ export const alumnos: Student[] = [
         password: "123456",
         token: '',
         role: '',
-        courseId: 1
       },
 ]

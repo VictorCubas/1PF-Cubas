@@ -13,6 +13,7 @@ import { AuthActions } from "../store/auth.actions.ts/auth.actions";
 @Injectable({providedIn: 'root'})
 export class AuthService{
     private isAuthenticated: boolean = false;
+  authUser$: any;
 
 
     constructor(

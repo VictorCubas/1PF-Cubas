@@ -36,6 +36,7 @@ describe('AuthService', () => {
       name: 'Victor',
       surname: 'Cubas',
       token: '2132342fsdfsdfadasdqwe',
+      role: ''
     }
 
     const mockResponse: Student[] = [mockUser];

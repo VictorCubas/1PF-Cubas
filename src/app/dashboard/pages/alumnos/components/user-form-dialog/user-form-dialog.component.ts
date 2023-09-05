@@ -64,7 +64,6 @@ export class UserFormDialogComponent {
       //se agrega el token a la data
       if(this.data?.userToEdit){
         payload["token"] = this.data.userToEdit.token;
-        payload["courseId"] = this.data.userToEdit.courseId;
       }
 
       this.dialogRef.close(payload);
