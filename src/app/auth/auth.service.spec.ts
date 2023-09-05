@@ -55,7 +55,7 @@ describe('AuthService', () => {
 
     // 3 - Vemos si recibimos el usuario autenticado despues del login
     service.authUser$.subscribe({
-      next: (authUser) => {
+      next: (authUser: any) => {
         expect(authUser).toBeTruthy();
         expect(authUser).toEqual(mockUser);
         done();
